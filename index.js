@@ -45,7 +45,7 @@ new CozeWebSDK.WebChatClient({
         * @param base.zIndex - The z-index of the chat box.
         */
         base: {
-            icon: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/chatsdk-logo.png',
+            icon: 'https://vn.freepik.com/bieu-tuong/chatbot_1698586',
             layout: 'pc',
             lang: 'en',
             zIndex: 1000
