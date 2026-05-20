@@ -24,7 +24,7 @@ new CozeWebSDK.WebChatClient({
         type: 'token',
         token: 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4',
         onRefreshToken: async () => 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4'
-    },
+    }, 
     /**
     * The userInfo parameter is used to set the display of agent user information in the chat box.
     * @param userInfo.id - ID of the agent user.
