@@ -314,6 +314,28 @@
             font-size: 1.2rem;
             margin-top: 5px;
         }
+        /* Thêm đoạn này vào phần CSS chung của bạn */
+        .container-custom {
+            width: 100%;
+            max-width: 1200px; /* Độ rộng chuẩn cho các khối nội dung bên dưới */
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+            box-sizing: border-box;
+        }
+        
+        /* Riêng phần Header và Footer thường rộng tràn màn hình nền, nhưng ruột bên trong vẫn gom vào giữa */
+        .header-inner, .footer-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
 
         /* --- Responsive Design --- */
         @media (max-width: 991px) {
