@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phôi Web - TikTok Snap & Fixed Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #e69116; 
+            --bg-color: #ffffff;
+            --text-color: #161823;
+            --text-gray: rgba(22, 24, 35, 0.75);
+            --border-color: rgba(22, 24, 35, 0.12);
+            --hover-color: #f1f1f2;
+            --header-height: 60px;
+            --sidebar-width: 250px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        body { background-color: var(--bg-color); color: var(--text-color); overflow: hidden; }
+
+        /* HEADER */
+        .app-header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            background-color: var(--bg-color); border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 1000;
+        }
+        .header-logo { font-size: 24px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .header-logo i { color: var(--primary-color); }
+        .header-actions button { padding: 10px 24px; background: var(--primary-color); color: #fff; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+
+        /* SIDEBAR */
+        .app-sidebar {
+            position: fixed; top: var(--header-height); left: 0; width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height)); border-right: 1px solid var(--border-color);
+            padding: 20px 12px; overflow-y: auto; background: var(--bg-color); z-index: 999;
+        }
+        .sidebar-search { margin-bottom: 20px; }
+        .search-bar { display: flex; align-items: center; background: rgba(22, 24, 35, 0.06); border-radius: 92px; padding: 10px 16px; }
+        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; }
+        
+        .menu-item { display: flex; align-items: center; gap: 12px; padding: 12px; font-size: 18px; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 4px; }
+        .menu-item:hover { background-color: var(--hover-color); }
+        .menu-item.active { color: var(--primary-color); }
+
+        /* MAIN CONTENT */
+        .app-main {
+            margin-top: var(--header-height); margin-left: var(--sidebar-width);
+            height: calc(100vh - var(--header-height)); overflow-y: scroll; 
+            scroll-snap-type: y mandatory; scroll-behavior: smooth;
+        }
+        .app-main::-webkit-scrollbar { display: none; }
+
+        .video-post {
+            display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px; 
+            scroll-snap-align: center;      /* Canh đầu bài */
+            scroll-snap-stop: always;
+            height: 95vh; height: calc(95vh - var(--header-height)); margin: 2.5vh 0;
+        }
+        .video-container {
+            width: 340px; height: 100%; max-height: 600px; background-color: #000; border-radius: 12px;
+            position: relative; background-size: cover; background-position: center;
+        }
+        .video-info { position: absolute; bottom: 20px; left: 16px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .action-buttons { display: flex; flex-direction: column; gap: 16px; }
+        .icon-container { width: 48px; height: 48px; background-color: var(--hover-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-logo"><i class="fa-brands fa-azo"></i> <span>AZO</span></div>
+        <div class="header-actions"><button>Đăng nhập</button></div>
+    </header>
+
+    <aside class="app-sidebar">
+        <div class="sidebar-search">
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm...">
+                <i class="fa-solid fa-magnifying-glass" style="color: #8a8b91;"></i>
+            </div>
+        </div>
+        <nav>
+            <div class="menu-item active"><i class="fa-solid fa-house"></i> <span>Đề xuất</span></div>
+            <div class="menu-item"><i class="fa-regular fa-compass"></i> <span>Khám phá</span></div>
+            <div class="menu-item"><i class="fa-solid fa-user-group"></i> <span>Đã follow</span></div>
+            <div class="menu-item"><i class="fa-regular fa-user"></i> <span>Hồ sơ</span></div>
+        </nav>
+    </aside>
+
+    <main class="app-main">
+        <div class="content-feed">
+            <!-- Thêm các video khác tương tự tại đây -->
+            <!-- Video 1 -->
+            <article class="video-post">
+                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
+                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+                </div>
+                <div class="action-buttons">
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    </button>
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-share"></i>
+                        </div>
+                    </button>
+                </div>
+            </article>
+            <article class="video-post">
+                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
+                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+                </div>
+                <div class="action-buttons">
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    </button>
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-share"></i>
+                        </div>
+                    </button>
+                </div>
+            </article>
+            <article class="video-post">
+                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
+                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+                </div>
+                <div class="action-buttons">
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    </button>
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-share"></i>
+                        </div>
+                    </button>
+                </div>
+            </article>
+            <article class="video-post">
+                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
+                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+                </div>
+                <div class="action-buttons">
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    </button>
+                    <div class="action-buttons">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-share"></i>
+                        </div>
+                    </button>
+                </div>
+            </article>
+        </div>
+        <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/oversea/index.js"></script>
+        <script src="./index.js"></script>
+    </main>
+
+</body>
+</html>
