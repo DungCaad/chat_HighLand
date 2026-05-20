@@ -3,174 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Highlands</title>
+    <title>Highlands Coffee - Đặt Giao Ngay</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --primary-color: #e69116; 
-            --bg-color: #ffffff;
-            --text-color: #161823;
-            --text-gray: rgba(22, 24, 35, 0.75);
-            --border-color: rgba(22, 24, 35, 0.12);
-            --hover-color: #f1f1f2;
-            --header-height: 60px;
-            --sidebar-width: 250px;
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        body {
+            background-color: #fff;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-
-        body { background-color: var(--bg-color); color: var(--text-color); overflow: hidden; }
-
-        /* HEADER */
-        .app-header {
-            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
-            background-color: var(--bg-color); border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 1000;
+        /* --- Header Section --- */
+        header {
+            background-color: #b22830;
+            color: #fff;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .header-logo { font-size: 24px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .header-logo i { color: var(--primary-color); }
-        .header-actions button { padding: 10px 24px; background: var(--primary-color); color: #fff; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-left ul, .nav-right ul {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .logo img {
+            height: 55px;
+            display: block;
+        }
+        .lang-switch img {
+            width: 20px;
+            height: 14px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .lang-switch span {
+            margin: 0 5px;
+            color: #ccc;
+        }
 
-        /* SIDEBAR */
-        .app-sidebar {
-            position: fixed; top: var(--header-height); left: 0; width: var(--sidebar-width);
-            height: calc(100vh - var(--header-height)); border-right: 1px solid var(--border-color);
-            padding: 20px 12px; overflow-y: auto; background: var(--bg-color); z-index: 999;
+        /* --- Hero Menu Products Section --- */
+        .hero-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            height: 600px;
+            overflow: hidden;
         }
-        .sidebar-search { margin-bottom: 20px; }
-        .search-bar { display: flex; align-items: center; background: rgba(22, 24, 35, 0.06); border-radius: 92px; padding: 10px 16px; }
-        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; }
-        
-        .menu-item { display: flex; align-items: center; gap: 12px; padding: 12px; font-size: 18px; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 4px; }
-        .menu-item:hover { background-color: var(--hover-color); }
-        .menu-item.active { color: var(--primary-color); }
+        .menu-item {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 50px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        .menu-item:hover::before {
+            background: rgba(0,0,0,0.3);
+        }
+        .menu-item-content {
+            position: relative;
+            z-index: 2;
+        }
+        .bg-text {
+            position: absolute;
+            top: 10%;
+            font-size: 7rem;
+            font-weight: 900;
+            color: rgba(243, 145, 36, 0.75);
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            letter-spacing: 2px;
+        }
+        .menu-item:nth-child(2) .bg-text {
+            top: unset;
+            bottom: -5%;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 8rem;
+        }
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+        .product-price {
+            font-size: 1.8rem;
+            color: #f39124;
+            font-weight: 800;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
 
-        /* MAIN CONTENT */
-        .app-main {
-            margin-top: var(--header-height); margin-left: var(--sidebar-width);
-            height: calc(100vh - var(--header-height)); overflow-y: scroll; 
-            scroll-snap-type: y mandatory; scroll-behavior: smooth;
+        /* --- App Promotion Section --- */
+        .app-promo {
+            display: flex;
+            background-color: #fffbf5;
+            align-items: center;
         }
-        .app-main::-webkit-scrollbar { display: none; }
+        .promo-banner {
+            flex: 1;
+            background-color: #e51922;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .promo-banner img {
+            max-width: 85%;
+            height: auto;
+        }
+        .promo-info {
+            flex: 1;
+            text-align: center;
+            padding: 40px;
+        }
+        .promo-info h2 {
+            color: #004624;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .promo-info p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .btn-round {
+            display: inline-block;
+            border: 2px solid #555;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .btn-round:hover {
+            background-color: #b22830;
+            color: #fff;
+            border-color: #b22830;
+        }
 
-        .video-post {
-            display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px; 
-            scroll-snap-align: center;      /* Canh đầu bài */
-            scroll-snap-stop: always;
-            height: 95vh; height: calc(95vh - var(--header-height)); margin: 2.5vh 0;
+        /* --- Grid Grid Sections (Đồng hành & Khám phá) --- */
+        .section-title {
+            text-align: center;
+            padding: 50px 0 30px;
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: bold;
         }
-        .video-container {
-            width: 340px; height: 100%; max-height: 600px; background-color: #000; border-radius: 12px;
-            position: relative; background-size: cover; background-position: center;
+        .triple-grid {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 0 20px;
         }
-        .video-info { position: absolute; bottom: 20px; left: 16px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .action-buttons { display: flex; flex-direction: column; gap: 16px; }
-        .icon-container { width: 48px; height: 48px; background-color: var(--hover-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .grid-card {
+            text-align: center;
+        }
+        .card-img-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .card-img-wrapper img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+        .grid-card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dual Grid Combo */
+        .dual-grid {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+        .dual-grid .card-img-wrapper img {
+            height: 380px;
+        }
+
+        /* --- Store Location Section --- */
+        .store-section {
+            display: flex;
+            background-color: #fffbf5;
+            align-items: center;
+        }
+        .store-info {
+            flex: 1;
+            text-align: center;
+            padding: 50px;
+        }
+        .store-info h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .store-info h2 span {
+            display: block;
+            font-weight: normal;
+        }
+        .store-info p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .store-image {
+            flex: 1.3;
+        }
+        .store-image img {
+            width: 100%;
+            display: block;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        /* --- Footer Section --- */
+        footer {
+            background-color: #b22830;
+            color: #fff;
+            padding: 40px 60px;
+            font-size: 14px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-logo img {
+            height: 65px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+        .footer-column h4 {
+            font-size: 15px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .footer-column ul flex {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-column li {
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        .footer-column li:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 991px) {
+            header { padding: 15px 20px; }
+            .nav-left, .nav-right .m-delivery, .nav-right .m-search { display: none; }
+            .hero-menu { grid-template-columns: 1fr; height: auto; }
+            .menu-item { height: 350px; }
+            .app-promo, .store-section { flex-direction: column; }
+            .triple-grid, .dual-grid { grid-template-columns: 1fr; }
+            .footer-container { flex-direction: column; gap: 30px; }
+            .footer-links { flex-direction: column; gap: 30px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-logo"><i class="fa-solid fa-mug-hot"></i> <span>Highlands</span></div>
-        <div class="header-actions"><button>Đăng nhập</button></div>
+    <header>
+        <div class="header-container">
+            <nav class="nav-left">
+                <ul>
+                    <li><a href="#">Thực Đơn</a></li>
+                    <li><a href="#">Về Highlands</a></li>
+                    <li><a href="#">Tin Tức</a></li>
+                    <li><a href="#">Hỗ Trợ</a></li>
+                </ul>
+            </nav>
+            
+            <div class="logo">
+                <a href="#"><img src="https://www.highlandscoffee.com.vn/vnt_upload/weblink/red_BG_logo800.png" alt="Highlands Coffee"></a>
+            </div>
+
+            <nav class="nav-right">
+                <ul>
+                    <li class="m-delivery"><a href="#">Giao Hàng</a></li>
+                    <li class="m-search"><a href="#"><i class="fa fa-map-marker"></i> Tìm kiếm cửa hàng</a></li>
+                    <li class="lang-switch">
+                        <a href="#"><img src="https://www.highlandscoffee.com.vn/vnt_upload/lang/flag-vn.jpg" alt="VN"></a>
+                        <span>|</span>
+                        <a href="#"><img src="https://www.highlandscoffee.com.vn/vnt_upload/lang/flag-en.jpg" alt="EN"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <aside class="app-sidebar">
-        <div class="sidebar-search">
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm...">
-                <i class="fa-solid fa-magnifying-glass" style="color: #8a8b91;"></i>
+    <section class="hero-menu">
+        <div class="menu-item" style="background-image: url('https://www.highlandscoffee.com.vn/vnt_upload/weblink/HCO_7821_ESPRESSO_LAUNCH_NEW_PRICE_NEW_KV_DC_BANNER_MWB_1920_x_926.jpg');">
+            <div class="bg-text">ĐÃAA</div>
+            <div class="menu-item-content">
+                <div class="product-title">Cappuccino Đá</div>
+                <div class="product-price">59<span style="font-size:18px; vertical-align:super;">K</span></div>
             </div>
         </div>
-        <nav>
-            <div class="menu-item active"><i class="fa-solid fa-house"></i> <span>Đề xuất</span></div>
-            <div class="menu-item"><i class="fa-regular fa-compass"></i> <span>Khám phá</span></div>
-            <div class="menu-item"><i class="fa-solid fa-user-group"></i> <span>Đã follow</span></div>
-            <div class="menu-item"><i class="fa-regular fa-user"></i> <span>Hồ sơ</span></div>
-        </nav>
-    </aside>
+        <div class="menu-item" style="background-image: url('https://www.highlandscoffee.com.vn/vnt_upload/weblink/HCO_7821_ESPRESSO_LAUNCH_NEW_PRICE_NEW_KV_DC_BANNER_MWB_1920_x_926.jpg');">
+            <div class="bg-text">ĐÃAA</div>
+            <div class="menu-item-content">
+                <div class="product-title">Latte Đá</div>
+                <div class="product-price">59<span style="font-size:18px; vertical-align:super;">K</span></div>
+            </div>
+        </div>
+        <div class="menu-item" style="background-image: url('https://www.highlandscoffee.com.vn/vnt_upload/weblink/HCO_7821_ESPRESSO_LAUNCH_NEW_PRICE_NEW_KV_DC_BANNER_MWB_1920_x_926.jpg');">
+            <div class="bg-text">ĐÃAA</div>
+            <div class="menu-item-content">
+                <div class="product-title">Americano Đá</div>
+                <div class="product-price">49<span style="font-size:18px; vertical-align:super;">K</span></div>
+            </div>
+        </div>
+    </section>
 
-    <main class="app-main">
-        <div class="content-feed">
-            <!-- Thêm các video khác tương tự tại đây -->
-            <!-- Video 1 -->
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+    <section class="app-promo">
+        <div class="promo-banner">
+            <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/Website_bannerr.png" alt="Highlands Di App">
+        </div>
+        <div class="promo-info">
+            <h2>App Thành Viên<br>HighlandsĐI</h2>
+            <p>Đặt trước - Lấy ngay, không cần đợi</p>
+            <a href="#" class="btn-round">TẢI APP NGAY</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title">Đồng Hành Cùng Highlands</div>
+        <div class="triple-grid">
+            <div class="grid-card">
+                <div class="card-img-wrapper">
+                    <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/WEB_Banner.png" alt="Highlands Rewards">
                 </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                <div class="card-title">HIGHLANDS REWARDS</div>
+            </div>
+            <div class="grid-card">
+                <div class="card-img-wrapper">
+                    <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/bbimg2.jpg" alt="Thẻ Highlands">
+                </div>
+                <div class="card-title">THẺ HIGHLANDS</div>
+            </div>
+            <div class="grid-card">
+                <div class="card-img-wrapper">
+                    <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/505392773_1120548066764868_2724070916068790506_n.jpg" alt="Cơ hội nghề nghiệp">
+                </div>
+                <div class="card-title">CƠ HỘI NGHỀ NGHIỆP</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="dual-grid">
+            <div class="grid-card">
+                <div class="card-img-wrapper">
+                    <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/web_banner_2000x2000.jpg" alt="Nước ngon thưởng vị">
+                </div>
+                <div class="card-title">NƯỚC NGON THƯỞNG VỊ</div>
+            </div>
+            <div class="grid-card">
+                <div class="card-img-wrapper">
+                    <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/2.png" alt="Bánh ngon no đầy">
+                </div>
+                <div class="card-title">BÁNH NGON NO ĐẦY</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store-section">
+        <div class="store-info">
+            <h2>Cửa Hàng<br><span>Highlands Gần Bạn</span></h2>
+            <p>Bạn ở đâu, có Highlands ở đó!</p>
+            <a href="#" class="btn-round">KHÁM PHÁ NGAY</a>
+        </div>
+        <div class="store-image">
+            <img src="https://www.highlandscoffee.com.vn/vnt_upload/home/1_1.jpg" alt="Cửa hàng Highlands">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://www.highlandscoffee.com.vn/vnt_upload/weblink/ftlogo.png" alt="Highlands Coffee White Logo">
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Về Highlands</h4>
+                    <ul>
+                        <li><a href="#">Nguồn gốc</a></li>
+                        <li><a href="#">Dịch vụ</a></li>
+                        <li><a href="#">Nghề nghiệp</a></li>
+                        <li><a href="#">Hỗ trợ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Hệ thống cửa hàng</h4>
+                    <ul>
+                        <li><a href="#">Tìm cửa hàng gần nhất</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Tin tức</h4>
+                    <ul>
+                        <li><a href="#">Tin tức & Sự kiện</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
                 </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://i0.wp.com/highlandsvoucher.com/wp-content/uploads/2026/04/ma-giam-gia-highlands-coffee.png?resize=600%2C900&ssl=1');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqg9LWEg-DqfMoGPbyUb2Z7cHQiRdPOlZw1A&s');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
+            </div>
         </div>
         <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/oversea/index.js"></script>
         <script src="./index.js"></script>
-    </main>
+    </footer>
 
 </body>
 </html>
+        
