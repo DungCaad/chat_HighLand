@@ -72,105 +72,66 @@
 <body>
 
     <header class="app-header">
-        <div class="header-logo"><i class="fa-brands fa-azo"></i> <span>AZO</span></div>
-        <div class="header-actions"><button>Đăng nhập</button></div>
+        <div class="header-logo"><i class="fa-solid fa-bolt"></i> <span>AZO TOEIC</span></div>
+        <div class="header-actions"><button>Học ngay</button></div>
     </header>
 
     <aside class="app-sidebar">
         <div class="sidebar-search">
             <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm...">
+                <input type="text" placeholder="Tìm kiếm bộ tủ...">
                 <i class="fa-solid fa-magnifying-glass" style="color: #8a8b91;"></i>
             </div>
         </div>
         <nav>
-            <div class="menu-item active"><i class="fa-solid fa-house"></i> <span>Đề xuất</span></div>
+            <div class="menu-item active"><i class="fa-solid fa-house"></i> <span>Dành cho bạn</span></div>
             <div class="menu-item"><i class="fa-regular fa-compass"></i> <span>Khám phá</span></div>
-            <div class="menu-item"><i class="fa-solid fa-user-group"></i> <span>Đã follow</span></div>
+            <div class="menu-item"><i class="fa-solid fa-book-open"></i> <span>Sổ tay 150S+</span></div>
             <div class="menu-item"><i class="fa-regular fa-user"></i> <span>Hồ sơ</span></div>
         </nav>
     </aside>
 
     <main class="app-main">
         <div class="content-feed">
-            <!-- Thêm các video khác tương tự tại đây -->
-            <!-- Video 1 -->
             <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
+                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80');">
+                    <div class="video-info"><h3>@azo_study</h3><p>Bí kíp dùng Tủ 1 cho Q7 cực dễ!</p></div>
                 </div>
                 <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
-                </div>
-            </article>
-            <article class="video-post">
-                <div class="video-container" style="background-image: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=600&q=80');">
-                    <div class="video-info"><h3>@dev_automation</h3><p>Tìm kiếm đã chuyển sang sidebar!</p></div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                    </button>
-                    <div class="action-buttons">
-                        <div class="icon-container">
-                            <i class="fa-solid fa-share"></i>
-                        </div>
-                    </button>
+                    <div class="icon-container"><i class="fa-solid fa-heart"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-share"></i></div>
                 </div>
             </article>
         </div>
-        <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/oversea/index.js"></script>
-        <script src="./index.js"></script>
     </main>
 
+    <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/oversea/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+            config: {
+                bot_id: '7641453928202469429',
+            },
+            auth: {
+                type: 'token',
+                token: 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4',
+                onRefreshToken: async () => 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4'
+            },
+            ui: {
+                base: {
+                    icon: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/chatsdk-logo.png',
+                    layout: 'pc',
+                    lang: 'en',
+                    zIndex: 1000
+                },
+                asstBtn: {
+                    isNeed: true
+                },
+                chatBot: {
+                    title: 'Trợ lý TOEIC 150S+',
+                    width: 390
+                }
+            }
+        });
+    </script>
 </body>
 </html>
