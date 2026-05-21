@@ -32,7 +32,7 @@ new CozeWebSDK.WebChatClient({
     * @param userInfo.nickname - Nickname of the agent user.
     */
     userInfo: {
-        id: 'user'+ Date.now(),
+        id: 'user_' + Date.now(), // Tạo ID duy nhất theo thời gian (ví dụ: user_1716301234567)
         url: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
         nickname: 'User',
     },
