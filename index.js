@@ -1,7 +1,7 @@
 new CozeWebSDK.WebChatClient({
     config: {
         type: 'bot',
-        bot_id: '7641453928202469429',
+        bot_id: '7641821512684961797',
         isIframe: false,
     },
     // Sử dụng component_id động để ép reset chat room mà không cần đổi User ID
