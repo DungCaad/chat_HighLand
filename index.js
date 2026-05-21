@@ -83,7 +83,7 @@ new CozeWebSDK.WebChatClient({
         * @param chatBot.el - Container for setting the placement of the chat box (Element).
         */
         chatBot: {
-            title: 'Coze Bot',
+            title: 'Hỗ trợ khách hàng',
             uploadable: true,
             width: 390,
         },
