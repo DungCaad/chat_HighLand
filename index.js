@@ -31,7 +31,7 @@ new CozeWebSDK.WebChatClient({
             isNeed: true
         },
         footer: {
-            isShow: true,
+            isShow: false,
             expressionText: 'Powered by ...',
         },
         chatBot: {
