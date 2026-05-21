@@ -32,7 +32,7 @@ new CozeWebSDK.WebChatClient({
     * @param userInfo.nickname - Nickname of the agent user.
     */
     userInfo: {
-        id: 'user',
+        id: 'user'+ Date.now(),
         url: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
         nickname: 'User',
     },
