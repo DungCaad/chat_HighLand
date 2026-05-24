@@ -37,7 +37,7 @@ new CozeWebSDK.WebChatClient({
         chatBot: {
             title: 'Hỗ trợ khách hàng',
             uploadable: true,
-            width: 390,
+            width: 1200,
         },
     },
 });
