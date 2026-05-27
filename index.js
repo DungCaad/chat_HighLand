@@ -1,43 +1,72 @@
-new CozeWebSDK.WebChatClient({
-    config: {
-        type: 'bot',
-        bot_id: '7641821512684961797',
-        isIframe: false,
-    },
-    // Sử dụng component_id động để ép reset chat room mà không cần đổi User ID
-    component_id: 'chat_' + Date.now(), 
-    auth: {
-        type: 'token',
-        token: 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4',
-        onRefreshToken: async () => 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4'
-    }, 
-    userInfo: {
-        id: 'user', // Giữ nguyên ID cố định cho người dùng này
-        url: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-        nickname: 'User',
-    },
-    ui: {
-        base: {
-            icon: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-            layout: 'pc',
-            lang: 'en',
-            zIndex: 1000
+<button id="toggle-chat">
+    Mở Chat
+</button>
+
+<script>
+    const chatClient = new CozeWebSDK.WebChatClient({
+        config: {
+            type: 'bot',
+            bot_id: '7641821512684961797',
+            isIframe: false,
         },
-        header: {
-            isShow: true,
-            isNeedClose: true,
+
+        component_id: 'chat_' + Date.now(),
+
+        auth: {
+            type: 'token',
+            token: 'YOUR_TOKEN',
+            onRefreshToken: async () => 'YOUR_TOKEN'
         },
-        asstBtn: {
-            isNeed: true
+
+        userInfo: {
+            id: 'user',
+            url: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+            nickname: 'User',
         },
-        footer: {
-            isShow: false,
-            expressionText: 'Powered by ...',
+
+        ui: {
+            base: {
+                icon: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+                layout: 'pc',
+                lang: 'en',
+                zIndex: 1000
+            },
+
+            header: {
+                isShow: true,
+                isNeedClose: true,
+            },
+
+            asstBtn: {
+                isNeed: false
+            },
+
+            footer: {
+                isShow: false,
+            },
+
+            chatBot: {
+                title: 'Hỗ trợ khách hàng',
+                uploadable: true,
+                width: 1200,
+            },
         },
-        chatBot: {
-            title: 'Hỗ trợ khách hàng',
-            uploadable: true,
-            width: 1200,
-        },
-    },
-});
+    });
+
+    let isOpen = false;
+
+    document
+        .getElementById('toggle-chat')
+        .addEventListener('click', () => {
+
+            if (isOpen) {
+                chatClient.hide();
+                document.getElementById('toggle-chat').innerText = 'Mở Chat';
+            } else {
+                chatClient.show();
+                document.getElementById('toggle-chat').innerText = 'Tắt Chat';
+            }
+
+            isOpen = !isOpen;
+        });
+</script>
