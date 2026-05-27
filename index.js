@@ -78,18 +78,34 @@ setTimeout(() => {
     // cho phép absolute
     header.style.position = 'relative';
 
+   // thêm nút X vào header chat
+setTimeout(() => {
+
+    // tìm header chat Coze
+    const header = document.querySelector('.coze-chat-sdk header');
+
+    if (!header) return;
+
+    // tránh tạo nhiều lần
+    if (document.getElementById('custom-close-chat')) return;
+
+    // cho phép absolute
+    header.style.position = 'relative';
+
     // tạo nút X
     const closeBtn = document.createElement('div');
+
+    closeBtn.id = 'custom-close-chat';
 
     closeBtn.innerHTML = '✕';
 
     closeBtn.style.cssText = `
         position:absolute;
-        right:15px;
         top:50%;
+        right:50px;
         transform:translateY(-50%);
         color:white;
-        font-size:22px;
+        font-size:24px;
         font-weight:bold;
         cursor:pointer;
         z-index:999999;
@@ -98,10 +114,15 @@ setTimeout(() => {
     // thêm vào header
     header.appendChild(closeBtn);
 
-    // đóng chat
+    // đóng cửa sổ chat
     closeBtn.onclick = () => {
 
-        chatBox.style.display = 'none';
+        const chatWindow = document.querySelector('.coze-chat-sdk');
+
+        if(chatWindow){
+
+            chatWindow.style.display = 'none';
+        }
     };
 
 }, 2000);
