@@ -1,20 +1,22 @@
-new CozeWebSDK.WebChatClient({
+// ==============================
+// COZE CHAT
+// ==============================
+
+const cozeChat = new CozeWebSDK.WebChatClient({
     config: {
         type: 'bot',
         bot_id: '7641821512684961797',
         isIframe: false,
     },
 
-    // Reset chat room mỗi lần load
     component_id: 'chat_' + Date.now(),
 
     auth: {
         type: 'token',
 
-        token: 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4',
+        token: 'YOUR_TOKEN',
 
-        onRefreshToken: async () =>
-            'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4'
+        onRefreshToken: async () => 'YOUR_TOKEN'
     },
 
     userInfo: {
@@ -26,9 +28,7 @@ new CozeWebSDK.WebChatClient({
     },
 
     ui: {
-
         base: {
-
             icon: 'https://sf-coze-web-cdn.coze.com/obj/eden-sg/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
 
             layout: 'pc',
@@ -39,97 +39,114 @@ new CozeWebSDK.WebChatClient({
         },
 
         header: {
-
             isShow: true,
-
-            isNeedClose: true,
+            isNeedClose: false,
         },
 
         asstBtn: {
-
             isNeed: true
         },
 
         footer: {
-
             isShow: false,
-
-            expressionText: 'Powered by ...',
         },
 
         chatBot: {
-
             title: 'Hỗ trợ khách hàng',
-
             uploadable: true,
-
             width: 1200,
+            height: 800
         },
     },
 });
 
 
-// ====================================
-// TẠO NÚT ĐÓNG CHAT
-// ====================================
-
-// tạo button
-const closeBtn = document.createElement('button');
-
-closeBtn.innerHTML = '✕';
-
-closeBtn.id = 'close-chat-btn';
-
-// thêm vào body
-document.body.appendChild(closeBtn);
-
-
-// ====================================
-// CSS NÚT ĐÓNG
-// ====================================
+// ==============================
+// CSS
+// ==============================
 
 const style = document.createElement('style');
 
 style.innerHTML = `
 
-#close-chat-btn{
+/* Nút X trong header chat */
 
-    position: fixed;
+#custom-chat-close{
 
-    top: 15px;
+    position:absolute;
 
-    right: 15px;
+    top:14px;
 
-    width: 42px;
+    right:14px;
 
-    height: 42px;
+    width:34px;
 
-    border: none;
+    height:34px;
 
-    border-radius: 50%;
+    border:none;
 
-    background: rgba(0,0,0,0.7);
+    border-radius:50%;
 
-    color: white;
+    background:rgba(255,255,255,0.15);
 
-    font-size: 22px;
+    color:white;
 
-    cursor: pointer;
+    font-size:18px;
 
-    z-index: 999999;
+    cursor:pointer;
 
-    display: flex;
+    z-index:999999;
 
-    align-items: center;
+    display:flex;
 
-    justify-content: center;
+    align-items:center;
 
-    transition: 0.3s;
+    justify-content:center;
+
+    transition:0.3s;
 }
 
-#close-chat-btn:hover{
+#custom-chat-close:hover{
 
-    background: #b22830;
+    background:rgba(255,255,255,0.3);
+}
+
+
+/* Nút mở lại chat */
+
+#open-chat-btn{
+
+    position:fixed;
+
+    bottom:20px;
+
+    right:20px;
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#b22830;
+
+    color:white;
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    z-index:999999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
 
 `;
@@ -137,22 +154,94 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 
-// ====================================
-// CLICK ĐỂ ĐÓNG CHAT
-// ====================================
+// ==============================
+// NÚT MỞ CHAT
+// ==============================
 
-closeBtn.onclick = () => {
+const openBtn = document.createElement('button');
 
-    // tìm container chat Coze
+openBtn.id = 'open-chat-btn';
+
+openBtn.innerHTML = '💬';
+
+document.body.appendChild(openBtn);
+
+
+// ==============================
+// THÊM NÚT X VÀO HEADER CHAT
+// ==============================
+
+function addCloseButton(){
+
+    // tìm header chat
+    const header = document.querySelector('[class*="header"]');
+
+    // tránh tạo nhiều lần
+    if(!header || document.getElementById('custom-chat-close')) return;
+
+    // đảm bảo header relative
+    header.style.position = 'relative';
+
+    // tạo nút
+    const closeBtn = document.createElement('button');
+
+    closeBtn.id = 'custom-chat-close';
+
+    closeBtn.innerHTML = '✕';
+
+    // append vào header
+    header.appendChild(closeBtn);
+
+    // click đóng chat
+    closeBtn.onclick = () => {
+
+        const chat = document.querySelector(
+            '[class*="coze"], .coze-web-sdk-chat-container'
+        );
+
+        if(chat){
+
+            chat.style.display = 'none';
+        }
+
+        // hiện nút mở lại
+        openBtn.style.display = 'flex';
+    };
+}
+
+
+// ==============================
+// MỞ LẠI CHAT
+// ==============================
+
+openBtn.onclick = () => {
+
     const chat = document.querySelector(
         '[class*="coze"], .coze-web-sdk-chat-container'
     );
 
     if(chat){
 
-        chat.style.display = 'none';
+        chat.style.display = 'block';
     }
 
-    // ẩn luôn nút X
-    closeBtn.style.display = 'none';
+    openBtn.style.display = 'none';
 };
+
+
+// ==============================
+// ĐỢI CHAT RENDER
+// ==============================
+
+const interval = setInterval(() => {
+
+    const header = document.querySelector('[class*="header"]');
+
+    if(header){
+
+        addCloseButton();
+
+        clearInterval(interval);
+    }
+
+}, 1000);
