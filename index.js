@@ -29,7 +29,7 @@ const chatClient = new CozeWebSDK.WebChatClient({
 
         type: 'token',
 
-        token: 'YOUR_COZE_TOKEN',
+        token: 'pat_RTSt5kZjsp6vdYAM8orR0uPuxFaXf4OtuCKCBV8bQ2D1Sk8DDDcPeSQoOURYvhn4',
 
         onRefreshToken: async () => {
 
