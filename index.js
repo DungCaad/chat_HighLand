@@ -60,69 +60,58 @@ new CozeWebSDK.WebChatClient({
 });
 
 
-// thêm nút X sau khi chat render
+// thêm nút X vào header chat
 setTimeout(() => {
 
-    // tìm đúng khung chat
-    const chatBox = document.querySelector(
-        '.coze-web-sdk-chat-container'
-    );
+    // tìm root chat
+    const chatRoot = document.querySelector('.coze-chat-sdk');
 
-    if (!chatBox) return;
+    if (!chatRoot) {
+        console.log('Không tìm thấy chat');
+        return;
+    }
 
-    // tìm header bên trong chat
-    const header = chatBox.querySelector('header, [class*="header"]');
+    // tìm header đỏ
+    const header = chatRoot.querySelector('header');
 
-    if (!header) return;
-
-    // cho phép absolute
-    header.style.position = 'relative';
-
-   // thêm nút X vào header chat
-setTimeout(() => {
-
-    // tìm header chat Coze
-    const header = document.querySelector('.coze-chat-sdk header');
-
-    if (!header) return;
+    if (!header) {
+        console.log('Không tìm thấy header');
+        return;
+    }
 
     // tránh tạo nhiều lần
-    if (document.getElementById('custom-close-chat')) return;
+    if (document.getElementById('close-chat-btn')) return;
 
-    // cho phép absolute
+    // cho absolute hoạt động
     header.style.position = 'relative';
 
     // tạo nút X
     const closeBtn = document.createElement('div');
 
-    closeBtn.id = 'custom-close-chat';
+    closeBtn.id = 'close-chat-btn';
 
     closeBtn.innerHTML = '✕';
 
     closeBtn.style.cssText = `
         position:absolute;
+        right:60px;
         top:50%;
-        right:50px;
         transform:translateY(-50%);
         color:white;
-        font-size:24px;
+        font-size:22px;
         font-weight:bold;
         cursor:pointer;
         z-index:999999;
+        user-select:none;
     `;
 
     // thêm vào header
     header.appendChild(closeBtn);
 
-    // đóng cửa sổ chat
+    // click đóng chat
     closeBtn.onclick = () => {
 
-        const chatWindow = document.querySelector('.coze-chat-sdk');
-
-        if(chatWindow){
-
-            chatWindow.style.display = 'none';
-        }
+        chatRoot.style.display = 'none';
     };
 
-}, 2000);
+}, 3000);
