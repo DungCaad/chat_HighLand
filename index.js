@@ -25,7 +25,7 @@ new CozeWebSDK.WebChatClient({
         },
         header: {
             isShow: true,
-            isNeedClose: true,
+            closeable: true,
         },
         asstBtn: {
             isNeed: true
@@ -38,6 +38,7 @@ new CozeWebSDK.WebChatClient({
             title: 'Hỗ trợ khách hàng',
             uploadable: true,
             width: 1200,
+            height: 800
         },
     },
 });
