@@ -63,10 +63,20 @@ new CozeWebSDK.WebChatClient({
 // thêm nút X sau khi chat render
 setTimeout(() => {
 
-    // tìm header chat
-    const header = document.querySelector('[class*="header"]');
+    // tìm đúng khung chat
+    const chatBox = document.querySelector(
+        '.coze-web-sdk-chat-container'
+    );
+
+    if (!chatBox) return;
+
+    // tìm header bên trong chat
+    const header = chatBox.querySelector('header, [class*="header"]');
 
     if (!header) return;
+
+    // cho phép absolute
+    header.style.position = 'relative';
 
     // tạo nút X
     const closeBtn = document.createElement('div');
@@ -76,29 +86,22 @@ setTimeout(() => {
     closeBtn.style.cssText = `
         position:absolute;
         right:15px;
-        top:12px;
+        top:50%;
+        transform:translateY(-50%);
         color:white;
-        font-size:20px;
+        font-size:22px;
+        font-weight:bold;
         cursor:pointer;
         z-index:999999;
     `;
 
-    // để absolute hoạt động
-    header.style.position = 'relative';
-
     // thêm vào header
     header.appendChild(closeBtn);
 
-    // click để ẩn chat
+    // đóng chat
     closeBtn.onclick = () => {
 
-        const chat = document.querySelector(
-            '[class*="coze"], .coze-web-sdk-chat-container'
-        );
-
-        if(chat){
-            chat.style.display = 'none';
-        }
+        chatBox.style.display = 'none';
     };
 
-}, 1500);
+}, 2000);
