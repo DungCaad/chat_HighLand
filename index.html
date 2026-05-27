@@ -351,6 +351,22 @@
             .footer-container { flex-direction: column; gap: 30px; }
             .footer-links { flex-direction: column; gap: 30px; }
         }
+        /* Hiển thị nút X của Coze Chat */
+        .coze-web-sdk-chat-header-close,
+        [class*="close"],
+        [class*="Close"] {
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            color: #fff !important;
+            cursor: pointer !important;
+        }
+        
+        /* Tăng kích thước nút X */
+        .coze-web-sdk-chat-header-close svg {
+            width: 20px !important;
+            height: 20px !important;
+        }
     </style>
 </head>
 <body>
